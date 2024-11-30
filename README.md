@@ -720,4 +720,4 @@ Insights:<br>
 ## Conclusion:<br>
 - Conducted data cleaning and preprocessing to resolve duplicates, missing values, and inconsistent data types, ensuring a reliable dataset for analysis.
 - Performed exploratory data analysis (EDA) to uncover insights on top-selling categories, regional trends, and customer preferences, enabling informed decision-making.
-- Identified inefficiencies, including a 14.21% cancellation rate and 5.2% unshipped orders, and recommended strategies to enhance Courier Services and reduce cancellations.
+- Identified inefficiencies, including a 14.21% cancellation rate and 5.2% unshipped orders, and recommended strategies to enhance user experiance and reduce cancellations.
