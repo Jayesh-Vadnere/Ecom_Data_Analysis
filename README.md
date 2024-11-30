@@ -1,147 +1,147 @@
 # Ecom_Data_Analysis
 
-## Description:
-The e-commerce dataset from Amazon.in contains approximately 128,976 rows and 19 columns. The columns are described as follows::
- 0   index               : The index of each row in the dataset
- 1   Order ID            : Unique identifier for each order.
- 2   Date                : Date when the order was placed. 
- 3   Status              : Current status of the order (e.g., Pending, Shipped, Delivered). 
- 4   Fulfilment          : Indicates if the order was fulfilled by Amazon or the merchant.
- 5   Sales Channel       : Specifies whether the order was from Amazon or a third-party seller (No-Amazon). 
- 6   ship-service-level  : Indicates the shipping method selected (Standard or Expedited). 
- 7   Category            : Product category or type of items in the order (e.g., Electronics, Books). 
+## Description:<br>
+The e-commerce dataset from Amazon.in contains approximately 128,976 rows and 19 columns. The columns are described as follows:<br>
+ 0   index               : The index of each row in the dataset<br>
+ 1   Order ID            : Unique identifier for each order.<br>
+ 2   Date                : Date when the order was placed.<br>
+ 3   Status              : Current status of the order (e.g., Pending, Shipped, Delivered).<br> 
+ 4   Fulfilment          : Indicates if the order was fulfilled by Amazon or the merchant.<br>
+ 5   Sales Channel       : Specifies whether the order was from Amazon or a third-party seller (No-Amazon).<br> 
+ 6   ship-service-level  : Indicates the shipping method selected (Standard or Expedited).<br>
+ 7   Category            : Product category or type of items in the order (e.g., Electronics, Books).<br> 
  8   Size                : Size of the product(s) ordered (e.g., Small, Medium, Large). 
- 9   Courier Status      : Current shipping status of the order (e.g., Shipped, Unshipped, On the Way). 
- 10  Qty                 : Quantity of items ordered in the particular order.  
- 11  currency            : Currency used for the transaction.
- 12  Amount              : Total monetary value of the order.
- 13  ship-city           : The city where the order will be shipped to. 
- 14  ship-state          : The state or region where the order will be shipped to. 
- 15  ship-postal-code    : Postal code of the shipping address.
- 16  ship-country        : The country where the order will be shipped to.
- 17  B2B                 : Indicates if the order is a Business-to-Business (B2B) transaction (Yes/No).  
- 18  fulfilled-by        : The method of order fulfillment (e.g., Easy Ship, Merchant Fulfilled, etc.).
+ 9   Courier Status      : Current shipping status of the order (e.g., Shipped, Unshipped, On the Way).<br>
+ 10  Qty                 : Quantity of items ordered in the particular order.<br>  
+ 11  currency            : Currency used for the transaction.<br>
+ 12  Amount              : Total monetary value of the order.<br>
+ 13  ship-city           : The city where the order will be shipped to.<br>
+ 14  ship-state          : The state or region where the order will be shipped to.<br> 
+ 15  ship-postal-code    : Postal code of the shipping address.<br>
+ 16  ship-country        : The country where the order will be shipped to.<br>
+ 17  B2B                 : Indicates if the order is a Business-to-Business (B2B) transaction (Yes/No).<br>  
+ 18  fulfilled-by        : The method of order fulfillment (e.g., Easy Ship, Merchant Fulfilled, etc.).<br>
 
-## Data Cleaning:
+## Data Cleaning:<br>
 ```python
 amz.info()
 ```
-output:
- -   Column              Non-Null Count   Dtype  
----  ------              --------------   -----  
- 0   index               128976 non-null  int64  
- 1   Order ID            128976 non-null  object 
- 2   Date                128976 non-null  object 
- 3   Status              128976 non-null  object 
- 4   Fulfilment          128976 non-null  object 
- 5   Sales Channel       128976 non-null  object 
- 6   ship-service-level  128976 non-null  object 
- 7   Category            128976 non-null  object 
- 8   Size                128976 non-null  object 
- 9   Courier Status      128976 non-null  object 
- 10  Qty                 128976 non-null  int64  
- 11  currency            121176 non-null  object 
- 12  Amount              121176 non-null  float64
- 13  ship-city           128941 non-null  object 
- 14  ship-state          128941 non-null  object 
- 15  ship-postal-code    128941 non-null  float64
- 16  ship-country        128941 non-null  object 
- 17  B2B                 128976 non-null  bool   
- 18  fulfilled-by        39263 non-null   object
+output:<br>
+ -   Column              Non-Null Count   Dtype  <br>
+---  ------              --------------   -----  <br>
+ 0   index               128976 non-null  int64  <br>
+ 1   Order ID            128976 non-null  object <br>
+ 2   Date                128976 non-null  object <br>
+ 3   Status              128976 non-null  object <br>
+ 4   Fulfilment          128976 non-null  object <br>
+ 5   Sales Channel       128976 non-null  object <br>
+ 6   ship-service-level  128976 non-null  object <br>
+ 7   Category            128976 non-null  object <br>
+ 8   Size                128976 non-null  object <br>
+ 9   Courier Status      128976 non-null  object <br>
+ 10  Qty                 128976 non-null  int64  <br>
+ 11  currency            121176 non-null  object <br>
+ 12  Amount              121176 non-null  float64<br>
+ 13  ship-city           128941 non-null  object <br>
+ 14  ship-state          128941 non-null  object <br>
+ 15  ship-postal-code    128941 non-null  float64<br>
+ 16  ship-country        128941 non-null  object <br>
+ 17  B2B                 128976 non-null  bool   <br>
+ 18  fulfilled-by        39263 non-null   object <br>
 
  As we can see the datatypes of Date, ship-postal-code, etc. are incorrect. Also, data contains Null values.
 
-### Duplicate
-Displaying the duplicate rows:
+### Duplicate<br>
+Displaying the duplicate rows:<br>
 ```python
 amz[amz.duplicated()]
 ```
 
-Finding the total number of duplicate rows:
+Finding the total number of duplicate rows:<br>
 ```python
 amz.duplicated().sum()
 ```
 There are 168 duplicate rows in dataset.
 
-Removing duplicates:
+Removing duplicates:<br>
 ```python
 display(amz.drop_duplicates(keep = False, inplace = True))
 ```
 
-### Null Values
-Finding null values:
+### Null Values<br>
+Finding null values:<br>
 ```python
 amz.isna().sum()
 ```
 output:
-index                     0
-Order ID                  0
-Date                      0
-Status                    0
-Fulfilment                0
-Sales Channel             0
-ship-service-level        0
-Category                  0
-Size                      0
-Courier Status            0
-Qty                       0
-currency               7778
-Amount                 7778
-ship-city                31
-ship-state               31
-ship-postal-code         31
-ship-country             31
-B2B                       0
-fulfilled-by          89477
+index                     0<br>
+Order ID                  0<br>
+Date                      0<br>
+Status                    0<br>
+Fulfilment                0<br>
+Sales Channel             0<br>
+ship-service-level        0<br>
+Category                  0<br>
+Size                      0<br>
+Courier Status            0<br>
+Qty                       0<br>
+currency               7778<br>
+Amount                 7778<br>
+ship-city                31<br>
+ship-state               31<br>
+ship-postal-code         31<br>
+ship-country             31<br>
+B2B                       0<br>
+fulfilled-by          89477<br>
 
-Since, ship-city, ship-state, ship-postal-code, ship-country has only 31 balnks, removing it.
+Since, ship-city, ship-state, ship-postal-code, ship-country has only 31 balnks, removing it.<br>
 ```python
 amz.dropna(subset = 'ship-city',inplace=True)
 ```
 Since, ship-city, ship-state, ship-postal-code, ship-country is a geographical data, deleting ship-city also delete corresponding ship-state, ship-postal-code, ship-country.
 
-Finding unique values of currency column: 
+Finding unique values of currency column:<br> 
 ```python
 pd.unique(amz['currency'])
 ```
 array(['INR', nan], dtype=object)
 
-Replacing Null with INR values:
+Replacing Null with INR values:<br>
 ```python
 amz.fillna({'currency':'INR'}, inplace = True)
 ```
 
-Finding unique values of fulfilled-by column: 
+Finding unique values of fulfilled-by column:<br> 
 ```python
 pd.unique(amz['currency'])
 ```
-array(['Easy Ship', nan], dtype=object)
+array(['Easy Ship', nan], dtype=object)<br>
 
-nan are replaced by Self ship:
+nan are replaced by Self ship:<br>
 ```python
 amz.fillna({'fulfilled-by':'Self Ship'}, inplace = True)
 ```
-In India, there are 28 States and 8 union terretories. But, in data there are soem duplicates values, some are in lowecase, uppercase or abbreviated form.
+In India, there are 28 States and 8 union terretories. But, in data there are soem duplicates values, some are in lowecase, uppercase or abbreviated form.<br>
 ```python
 pd.unique(amz['ship-state']))
 ```
-output:
-array(['MAHARASHTRA', 'KARNATAKA', 'PUDUCHERRY', 'TAMIL NADU',
-       'UTTAR PRADESH', 'ANDHRA PRADESH', 'RAJASTHAN', 'DELHI', 'HARYANA',
-       'TELANGANA', 'ASSAM', 'JHARKHAND', 'CHHATTISGARH', 'ODISHA',
-       'KERALA', 'MADHYA PRADESH', 'WEST BENGAL', 'NAGALAND', 'Gujarat',
-       'UTTARAKHAND', 'BIHAR', 'JAMMU & KASHMIR', 'PUNJAB',
-       'HIMACHAL PRADESH', 'ARUNACHAL PRADESH', 'Goa', 'MEGHALAYA', 'GOA',
-       'MANIPUR', 'TRIPURA', 'LADAKH', 'DADRA AND NAGAR', 'CHANDIGARH',
-       'SIKKIM', 'Delhi', 'ANDAMAN & NICOBAR', 'Punjab', 'Rajshthan',
-       'Manipur', 'rajasthan', 'Odisha', 'NL', 'Bihar', 'MIZORAM',
-       'punjab', 'New Delhi', 'Rajasthan', 'Punjab/Mohali/Zirakpur',
-       'Puducherry', 'delhi', 'RJ', 'Chandigarh', 'orissa', 'LAKSHADWEEP',
-       'goa', 'PB', 'APO', 'Arunachal Pradesh', 'AR', 'Pondicherry',
-       'Sikkim', 'Arunachal pradesh', 'Nagaland', 'bihar', 'Mizoram',
-       'rajsthan', 'Orissa', 'Rajsthan', 'Meghalaya'], dtype=object)
+output:<br>
+array(['MAHARASHTRA', 'KARNATAKA', 'PUDUCHERRY', 'TAMIL NADU',<br>
+       'UTTAR PRADESH', 'ANDHRA PRADESH', 'RAJASTHAN', 'DELHI', 'HARYANA',<br>
+       'TELANGANA', 'ASSAM', 'JHARKHAND', 'CHHATTISGARH', 'ODISHA',<br>
+       'KERALA', 'MADHYA PRADESH', 'WEST BENGAL', 'NAGALAND', 'Gujarat',<br>
+       'UTTARAKHAND', 'BIHAR', 'JAMMU & KASHMIR', 'PUNJAB',<br>
+       'HIMACHAL PRADESH', 'ARUNACHAL PRADESH', 'Goa', 'MEGHALAYA', 'GOA',<br>
+       'MANIPUR', 'TRIPURA', 'LADAKH', 'DADRA AND NAGAR', 'CHANDIGARH',<br>
+       'SIKKIM', 'Delhi', 'ANDAMAN & NICOBAR', 'Punjab', 'Rajshthan',<br>
+       'Manipur', 'rajasthan', 'Odisha', 'NL', 'Bihar', 'MIZORAM',<br>
+       'punjab', 'New Delhi', 'Rajasthan', 'Punjab/Mohali/Zirakpur',<br>
+       'Puducherry', 'delhi', 'RJ', 'Chandigarh', 'orissa', 'LAKSHADWEEP',<br>
+       'goa', 'PB', 'APO', 'Arunachal Pradesh', 'AR', 'Pondicherry',<br>
+       'Sikkim', 'Arunachal pradesh', 'Nagaland', 'bihar', 'Mizoram',<br>
+       'rajsthan', 'Orissa', 'Rajsthan', 'Meghalaya'], dtype=object)<br>
 
-To solve this problem,
+To solve this problem,<br>
 ```python
 region = {'ANDAMAN & NICOBAR': 'ANDAMAN & NICOBAR ISLANDS',
  'ANDHRA PRADESH': 'ANDHRA PRADESH',
@@ -217,97 +217,97 @@ region = {'ANDAMAN & NICOBAR': 'ANDAMAN & NICOBAR ISLANDS',
 amz['ship-state'] = amz['ship-state'].replace(region)
 amz['ship-state'].sort_values().unique()
 ```
-output:
-array(['ANDAMAN & NICOBAR ISLANDS', 'ANDHRA PRADESH', 'ARUNACHAL PRADESH',
-       'ASSAM', 'BIHAR', 'CHANDIGARH', 'CHHATTISGARH',
-       'DADRA AND NAGAR HAVELI AND DAMAN AND DIU', 'DELHI', 'GOA',
-       'GUJARAT', 'HARYANA', 'HIMACHAL PRADESH', 'JAMMU & KASHMIR',
-       'JHARKHAND', 'KARNATAKA', 'KERALA', 'LADAKH', 'LAKSHADWEEP',
-       'MADHYA PRADESH', 'MAHARASHTRA', 'MANIPUR', 'MEGHALAYA', 'MIZORAM',
-       'NAGALAND', 'ODISHA', 'PUDUCHERRY', 'PUNJAB', 'RAJASTHAN',
-       'SIKKIM', 'TAMIL NADU', 'TELANGANA', 'TRIPURA', 'UTTAR PRADESH',
-       'UTTARAKHAND', 'WEST BENGAL'], dtype=object)
+output:<br>
+array(['ANDAMAN & NICOBAR ISLANDS', 'ANDHRA PRADESH', 'ARUNACHAL PRADESH',<br>
+       'ASSAM', 'BIHAR', 'CHANDIGARH', 'CHHATTISGARH',<br>
+       'DADRA AND NAGAR HAVELI AND DAMAN AND DIU', 'DELHI', 'GOA',<br>
+       'GUJARAT', 'HARYANA', 'HIMACHAL PRADESH', 'JAMMU & KASHMIR',<br>
+       'JHARKHAND', 'KARNATAKA', 'KERALA', 'LADAKH', 'LAKSHADWEEP',<br>
+       'MADHYA PRADESH', 'MAHARASHTRA', 'MANIPUR', 'MEGHALAYA', 'MIZORAM',<br>
+       'NAGALAND', 'ODISHA', 'PUDUCHERRY', 'PUNJAB', 'RAJASTHAN',<br>
+       'SIKKIM', 'TAMIL NADU', 'TELANGANA', 'TRIPURA', 'UTTAR PRADESH',<br>
+       'UTTARAKHAND', 'WEST BENGAL'], dtype=object)<br>
 
-Now, sinse Amount column has countinuous data, plotting boxplot:
+Now, sinse Amount column has countinuous data, plotting boxplot:<br>
 ```python
 sns.boxplot(amz['Amount'])
 plt.show()
 ```
 ![](boxplot.PNG)
 
-running descriptive analysis:
+running descriptive analysis:<br>
 ```python
 amz[['Amount']].describe()
 ```
-output:
-	    |Amount
-count	|120833.000000
-mean	|648.710886
-std	  |281.273230
-min	  |0.000000
-25%	  |449.000000
-50%	  |605.000000
-75%	  |788.000000
-max	  |5584.000000
+output:<br>
+	    |Amount<br>
+count	|120833.000000<br>
+mean	|648.710886<br>
+std	  |281.273230<br>
+min	  |0.000000<br>
+25%	  |449.000000<br>
+50%	  |605.000000<br>
+75%	  |788.000000<br>
+max	  |5584.000000<br>
 
-Since, Amount column has outliers, it makes sense to replace null values with median value.
+Since, Amount column has outliers, it makes sense to replace null values with median value.<br>
 ```python
 amz.fillna(amz['Amount'].median(),inplace = True)
 ```
-Now, our data is free from duplicates and Null values.
+Now, our data is free from duplicates and Null values.<br>
 
-Changing the name of Qty column to Quantity.
+Changing the name of Qty column to Quantity.<br>
 ```python
 amz.rename(columns = {'Qty':'Quantity'}, inplace = True)
 ```
-Changing datatype of 'Date' column:
+Changing datatype of 'Date' column:<br>
 ```python
 amz['Date'] = pd.to_datetime(amz['Date'], format='mixed', dayfirst=True, errors='coerce')
 ```
-Changing datatype of 'ship-postal-code' column:
+Changing datatype of 'ship-postal-code' column:<br>
 ```python
 amz['ship-postal-code'] = amz['ship-postal-code'].astype('int')
 ```
-Since, Data given is of India location. Hence ship-country column has all entries as 'India'. It makes sense to remove that column.
-Since, Data given is of India location. Hence courancy column has all entries as 'INR'. It makes sense to remove that column.
-Since, In data there is Order ID which is unique for each order. Hence there is no need of index column. It makes sense to remove that column.
+Since, Data given is of India location. Hence ship-country column has all entries as 'India'. It makes sense to remove that column.<br>
+Since, Data given is of India location. Hence courancy column has all entries as 'INR'. It makes sense to remove that column.<br>
+Since, In data there is Order ID which is unique for each order. Hence there is no need of index column. It makes sense to remove that column.<br>
 ```python
 amz.drop(['index', 'currency', 'ship-country'], axis=1, inplace=True)
 ```
 
-Again checking information about dataset:
+Again checking information about dataset:<br>
 ```python
 amz.info()
 ```
-output:
- #   Column              Non-Null Count   Dtype         
----  ------              --------------   -----         
- 0   Order ID            128609 non-null  object        
- 1   Date                128609 non-null  datetime64[ns]
- 2   Status              128609 non-null  object        
- 3   Fulfilment          128609 non-null  object        
- 4   Sales Channel       128609 non-null  object        
- 5   ship-service-level  128609 non-null  object        
- 6   Category            128609 non-null  object        
- 7   Size                128609 non-null  object        
- 8   Courier Status      128609 non-null  object        
- 9   Quantity            128609 non-null  int64         
- 10  Amount              128609 non-null  float64       
- 11  ship-city           128609 non-null  object        
- 12  ship-state          128609 non-null  object        
- 13  ship-postal-code    128609 non-null  int32         
- 14  B2B                 128609 non-null  bool          
- 15  fulfilled-by        128609 non-null  object
+output:<br>
+ -   Column              Non-Null Count   Dtype<br>         
+---  ------              --------------   -----<br>         
+ 0   Order ID            128609 non-null  object<br>     
+ 1   Date                128609 non-null  datetime64[ns]<br>
+ 2   Status              128609 non-null  object<br>        
+ 3   Fulfilment          128609 non-null  object<br>        
+ 4   Sales Channel       128609 non-null  object<br>    
+ 5   ship-service-level  128609 non-null  object<br>        
+ 6   Category            128609 non-null  object<br>        
+ 7   Size                128609 non-null  object<br>        
+ 8   Courier Status      128609 non-null  object<br>        
+ 9   Quantity            128609 non-null  int64<br>         
+ 10  Amount              128609 non-null  float64<br>       
+ 11  ship-city           128609 non-null  object<br>        
+ 12  ship-state          128609 non-null  object<br>        
+ 13  ship-postal-code    128609 non-null  int32<br>        
+ 14  B2B                 128609 non-null  bool<br>          
+ 15  fulfilled-by        128609 non-null  object<br>
 
 ```python
 amz.shape
 ```
-(128609, 16)
-Now, data is cleaned and ready for Exploratory Data Analysis.
+(128609, 16)<br>
+Now, data is cleaned and ready for Exploratory Data Analysis.<br>
 
 # Exploratory Data Analysis (EDA):
 
-### Distribution of Order Percentages by Months
+### Distribution of Order Percentages by Months<br>
 ```python
 order_counts = amz.groupby(amz['Date'].dt.to_period('M')).size()
 order_percentages = (order_counts / len(amz)) * 100
@@ -332,13 +332,13 @@ plt.show()
 ```
 ![](EDA1.PNG)
 
-Insightes:
-Top 3 months with highest orders are:
-1) April
-2) May
-3) June
+Insightes:<br>
+Top 3 months with highest orders are:<br>
+1) April<br>
+2) May<br>
+3) June<br>
 
-### Distribution of Order Percentages by Status
+### Distribution of Order Percentages by Status<br>
 ```python
 order_counts = amz.groupby('Status').size()
 order_percentages = (order_counts / len(amz)) * 100
@@ -364,10 +364,10 @@ plt.show()
 ```
 ![](EDA2.PNG)
 
-Insights:
-14.21% of the total orders are canceled, highlighting a negative aspect that could be improved.
+Insights:<br>
+14.21% of the total orders are canceled, highlighting a negative aspect that could be improved.<br>
 
-### Distribution of Order Percentages by Fulfilment
+### Distribution of Order Percentages by Fulfilment<br>
 ```python
 order_counts = amz.groupby('Fulfilment').size()
 order_percentages = (order_counts / len(amz)) * 100
@@ -381,10 +381,10 @@ plt.show()
 ```
 ![](EDA3.PNG)
 
-Insights:
-Approximately 70% of orders are fulfilled by Amazon, while the remaining 30% are handled by the merchant.
+Insights:<br>
+Approximately 70% of orders are fulfilled by Amazon, while the remaining 30% are handled by the merchant.<br>
 
-### Distribution of Order Percentages by Sales Channel
+### Distribution of Order Percentages by Sales Channel<br>
 ```python
 order_counts = amz.groupby('Sales Channel').size()
 order_percentages = (order_counts / len(amz)) * 100
@@ -399,10 +399,10 @@ plt.show()
 ```
 ![](EDA4.PNG)
 
-Insights:
-99.9% of order sales are through Amazon.
+Insights:<br>
+99.9% of order sales are through Amazon.<br>
 
-### Distribution of Order Percentages by Ship Service Level
+### Distribution of Order Percentages by Ship Service Level<br>
 ```python
 order_counts = amz.groupby('ship-service-level').size()
 order_percentages = (order_counts / len(amz)) * 100
@@ -417,10 +417,10 @@ plt.show()
 ```
 ![](EDA5.PNG)
 
-Insights:
-Expedited shipping accounts for 68.7% of orders, indicating a strong preference among customers for faster delivery over standard shipping options.
+Insights:<br>
+Expedited shipping accounts for 68.7% of orders, indicating a strong preference among customers for faster delivery over standard shipping options.<br>
 
-### Distribution of Order Percentages by Category
+### Distribution of Order Percentages by Category<br>
 ```python
 order_counts = amz.groupby('Category').size()
 order_percentages = (order_counts / len(amz)) * 100
@@ -446,13 +446,13 @@ plt.show()
 ```
 ![](EDA6.PNG)
 
-Insights:
-The top 3 selling categories are:
-1) T-shirt
-2) Shirt
-3) Blazzer
+Insights:<br>
+The top 3 selling categories are:<br>
+1) T-shirt<br>
+2) Shirt<br>
+3) Blazzer<br>
 
-### Distribution of Order Percentages by Size
+### Distribution of Order Percentages by Size<br>
 ```python
 order_counts = amz.groupby('Size').size()
 order_percentages = (order_counts / len(amz)) * 100
@@ -478,10 +478,10 @@ plt.show()
 ```
 ![](EDA7.PNG)
 
-Insights:
-Size M is the best-selling, while size 4XL is the least popular.
+Insights:<br>
+Size M is the best-selling, while size 4XL is the least popular.<br>
 
-### Distribution of Order Percentages by Courier Status
+### Distribution of Order Percentages by Courier Status<br>
 ```python
 order_counts = amz.groupby('Courier Status').size()
 order_percentages = (order_counts / len(amz)) * 100
@@ -497,10 +497,10 @@ plt.show()
 ```
 ![](EDA8.PNG)
 
-Insights:
-4.6% of orders are canceled, an issue that needs to be addressed. Additionally, 5.2% of orders remain unshipped, presenting an area for improvement.
+Insights:<br>
+4.6% of orders are canceled, an issue that needs to be addressed. Additionally, 5.2% of orders remain unshipped, presenting an area for improvement.<br>
 
-### Distribution of Order Percentages by Quantity
+### Distribution of Order Percentages by Quantity<br>
 ```python
 order_counts = amz.groupby('Quantity').size()
 order_percentages = (order_counts / len(amz)) * 100
@@ -527,10 +527,10 @@ plt.show()
 ```
 ![](EDA9.PNG)
 
-Insights:
-89.77% of customers place orders with a quantity of 1, indicating a strong preference for smaller purchases, which presents an opportunity to encourage larger orders.
+Insights:<br>
+89.77% of customers place orders with a quantity of 1, indicating a strong preference for smaller purchases, which presents an opportunity to encourage larger orders.<br>
 
-### Distribution of Order Percentages by Amount
+### Distribution of Order Percentages by Amount<br>
 ```python
 amz['Amount'].min(),amz['Amount'].max()
 ```
@@ -559,10 +559,10 @@ plt.show()
 ```
 ![](EDA10.PNG)
 
-Insights:
-Most of the order volume falls within the INR 500-600 range, with order volume decreasing as the order amount exceeds INR 1000.
+Insights:<br>
+Most of the order volume falls within the INR 500-600 range, with order volume decreasing as the order amount exceeds INR 1000.<br>
 
-### Distribution of Order Percentages by States
+### Distribution of Order Percentages by States<br>
 ```python
 order_counts = amz['ship-state'].value_counts().nlargest(5)
 order_percentages = (order_counts / len(amz)) * 100
@@ -609,10 +609,10 @@ plt.show()
 ```
 ![](EDA11.PNG)
 
-Insights:
-The highest order volume comes from Maharashtra, followed by Karnataka and Tamil Nadu. States with the lowest order volumes include LAKSHADWEEP, LADAKH and DADRA AND NAGAR HAVELI AND DAMAN AND DIU.
+Insights:<br>
+The highest order volume comes from Maharashtra, followed by Karnataka and Tamil Nadu. States with the lowest order volumes include LAKSHADWEEP, LADAKH and DADRA AND NAGAR HAVELI AND DAMAN AND DIU.<br>
 
-### Distribution of Order Percentages by Cities
+### Distribution of Order Percentages by Cities<br>
 ```python
 order_counts = amz['ship-city'].value_counts().nlargest(5)
 order_percentages = (order_counts / len(amz)) * 100
@@ -659,10 +659,10 @@ plt.show()
 ```
 ![](EDA12.PNG)
 
-Insights:
-The highest order volume comes from Bengaluru, followed by Hyderabad and Mumbai. Cities with the lowest order volumes include Kasumpti SHIMLA, NALLAPADU, and Edathala.
+Insights:<br>
+The highest order volume comes from Bengaluru, followed by Hyderabad and Mumbai. Cities with the lowest order volumes include Kasumpti SHIMLA, NALLAPADU, and Edathala.<br>
 
-### Distribution of Order Percentages by Postal Code
+### Distribution of Order Percentages by Postal Code<br>
 ```python
 order_counts = amz['ship-postal-code'].value_counts().nlargest(5)
 order_percentages = (order_counts / len(amz)) * 100
@@ -709,10 +709,10 @@ plt.show()
 ```
 ![](EDA13.PNG)
 
-Insights:
-The highest order volume comes from 201301, followed by 122001 and 560037. Cities with the lowest order volumes include 388160, 414609, and 799120.
+Insights:<br>
+The highest order volume comes from 201301, followed by 122001 and 560037. Cities with the lowest order volumes include 388160, 414609, and 799120.<br>
 
-### Distribution of Order Percentages by B2B
+### Distribution of Order Percentages by B2B<br>
 ```python
 order_counts = amz.groupby('B2B').size()
 order_percentages = (order_counts / len(amz)) * 100
@@ -726,10 +726,10 @@ plt.show()
 ```
 ![](EDA14.PNG)
 
-Insights:
-With only 0.7% of orders being B2B, there is significant potential to expand Amazon's B2B offerings.
+Insights:<br>
+With only 0.7% of orders being B2B, there is significant potential to expand Amazon's B2B offerings.<br>
 
-### Distribution of Order Percentages by Fulfilled by
+### Distribution of Order Percentages by Fulfilled by<br>
 ```python
 order_counts = amz.groupby('fulfilled-by').size()
 order_percentages = (order_counts / len(amz)) * 100
@@ -743,10 +743,10 @@ plt.show()
 ```
 ![](EDA15.PNG)
 
-Insights:
-30.4% of orders are fulfilled by Easy Ship, indicating significant potential for Amazon to expand its fulfillment capabilities.
+Insights:<br>
+30.4% of orders are fulfilled by Easy Ship, indicating significant potential for Amazon to expand its fulfillment capabilities.<br>
 
-## Conclusion:
+## Conclusion:<br>
 - Conducted data cleaning and preprocessing to resolve duplicates, missing values, and inconsistent data types, ensuring a reliable dataset for analysis.
 - Performed exploratory data analysis (EDA) to uncover insights on top-selling categories, regional trends, and customer preferences, enabling informed decision-making.
 - Identified inefficiencies, including a 14.21% cancellation rate and 5.2% unshipped orders, and recommended strategies to enhance Courier Services and reduce cancellations.
