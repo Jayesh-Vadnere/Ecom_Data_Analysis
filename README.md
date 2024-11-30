@@ -1,53 +1,19 @@
 # Ecom_Data_Analysis
 
+![](D.PNG)
+
 ## Description:<br>
-The e-commerce dataset from Amazon.in contains approximately 128,976 rows and 19 columns. The columns are described as follows:<br>
- 0   index               : The index of each row in the dataset<br>
- 1   Order ID            : Unique identifier for each order.<br>
- 2   Date                : Date when the order was placed.<br>
- 3   Status              : Current status of the order (e.g., Pending, Shipped, Delivered).<br> 
- 4   Fulfilment          : Indicates if the order was fulfilled by Amazon or the merchant.<br>
- 5   Sales Channel       : Specifies whether the order was from Amazon or a third-party seller (No-Amazon).<br> 
- 6   ship-service-level  : Indicates the shipping method selected (Standard or Expedited).<br>
- 7   Category            : Product category or type of items in the order (e.g., Electronics, Books).<br> 
- 8   Size                : Size of the product(s) ordered (e.g., Small, Medium, Large). 
- 9   Courier Status      : Current shipping status of the order (e.g., Shipped, Unshipped, On the Way).<br>
- 10  Qty                 : Quantity of items ordered in the particular order.<br>  
- 11  currency            : Currency used for the transaction.<br>
- 12  Amount              : Total monetary value of the order.<br>
- 13  ship-city           : The city where the order will be shipped to.<br>
- 14  ship-state          : The state or region where the order will be shipped to.<br> 
- 15  ship-postal-code    : Postal code of the shipping address.<br>
- 16  ship-country        : The country where the order will be shipped to.<br>
- 17  B2B                 : Indicates if the order is a Business-to-Business (B2B) transaction (Yes/No).<br>  
- 18  fulfilled-by        : The method of order fulfillment (e.g., Easy Ship, Merchant Fulfilled, etc.).<br>
+The e-commerce dataset from Amazon.in contains approximately 128,976 rows and 19 columns. The columns are described as follows:
+
+![](P1.PNG)
 
 ## Data Cleaning:<br>
 ```python
 amz.info()
 ```
 output:<br>
- -   Column              Non-Null Count   Dtype  <br>
----  ------              --------------   -----  <br>
- 0   index               128976 non-null  int64  <br>
- 1   Order ID            128976 non-null  object <br>
- 2   Date                128976 non-null  object <br>
- 3   Status              128976 non-null  object <br>
- 4   Fulfilment          128976 non-null  object <br>
- 5   Sales Channel       128976 non-null  object <br>
- 6   ship-service-level  128976 non-null  object <br>
- 7   Category            128976 non-null  object <br>
- 8   Size                128976 non-null  object <br>
- 9   Courier Status      128976 non-null  object <br>
- 10  Qty                 128976 non-null  int64  <br>
- 11  currency            121176 non-null  object <br>
- 12  Amount              121176 non-null  float64<br>
- 13  ship-city           128941 non-null  object <br>
- 14  ship-state          128941 non-null  object <br>
- 15  ship-postal-code    128941 non-null  float64<br>
- 16  ship-country        128941 non-null  object <br>
- 17  B2B                 128976 non-null  bool   <br>
- 18  fulfilled-by        39263 non-null   object <br>
+
+![](C1.PNG)
 
  As we can see the datatypes of Date, ship-postal-code, etc. are incorrect. Also, data contains Null values.
 
@@ -74,25 +40,8 @@ Finding null values:<br>
 amz.isna().sum()
 ```
 output:
-index                     0<br>
-Order ID                  0<br>
-Date                      0<br>
-Status                    0<br>
-Fulfilment                0<br>
-Sales Channel             0<br>
-ship-service-level        0<br>
-Category                  0<br>
-Size                      0<br>
-Courier Status            0<br>
-Qty                       0<br>
-currency               7778<br>
-Amount                 7778<br>
-ship-city                31<br>
-ship-state               31<br>
-ship-postal-code         31<br>
-ship-country             31<br>
-B2B                       0<br>
-fulfilled-by          89477<br>
+
+![](C2.PNG)
 
 Since, ship-city, ship-state, ship-postal-code, ship-country has only 31 balnks, removing it.<br>
 ```python
@@ -126,20 +75,8 @@ In India, there are 28 States and 8 union terretories. But, in data there are so
 pd.unique(amz['ship-state']))
 ```
 output:<br>
-array(['MAHARASHTRA', 'KARNATAKA', 'PUDUCHERRY', 'TAMIL NADU',<br>
-       'UTTAR PRADESH', 'ANDHRA PRADESH', 'RAJASTHAN', 'DELHI', 'HARYANA',<br>
-       'TELANGANA', 'ASSAM', 'JHARKHAND', 'CHHATTISGARH', 'ODISHA',<br>
-       'KERALA', 'MADHYA PRADESH', 'WEST BENGAL', 'NAGALAND', 'Gujarat',<br>
-       'UTTARAKHAND', 'BIHAR', 'JAMMU & KASHMIR', 'PUNJAB',<br>
-       'HIMACHAL PRADESH', 'ARUNACHAL PRADESH', 'Goa', 'MEGHALAYA', 'GOA',<br>
-       'MANIPUR', 'TRIPURA', 'LADAKH', 'DADRA AND NAGAR', 'CHANDIGARH',<br>
-       'SIKKIM', 'Delhi', 'ANDAMAN & NICOBAR', 'Punjab', 'Rajshthan',<br>
-       'Manipur', 'rajasthan', 'Odisha', 'NL', 'Bihar', 'MIZORAM',<br>
-       'punjab', 'New Delhi', 'Rajasthan', 'Punjab/Mohali/Zirakpur',<br>
-       'Puducherry', 'delhi', 'RJ', 'Chandigarh', 'orissa', 'LAKSHADWEEP',<br>
-       'goa', 'PB', 'APO', 'Arunachal Pradesh', 'AR', 'Pondicherry',<br>
-       'Sikkim', 'Arunachal pradesh', 'Nagaland', 'bihar', 'Mizoram',<br>
-       'rajsthan', 'Orissa', 'Rajsthan', 'Meghalaya'], dtype=object)<br>
+
+![](C3.PNG)
 
 To solve this problem,<br>
 ```python
@@ -218,37 +155,23 @@ amz['ship-state'] = amz['ship-state'].replace(region)
 amz['ship-state'].sort_values().unique()
 ```
 output:<br>
-array(['ANDAMAN & NICOBAR ISLANDS', 'ANDHRA PRADESH', 'ARUNACHAL PRADESH',<br>
-       'ASSAM', 'BIHAR', 'CHANDIGARH', 'CHHATTISGARH',<br>
-       'DADRA AND NAGAR HAVELI AND DAMAN AND DIU', 'DELHI', 'GOA',<br>
-       'GUJARAT', 'HARYANA', 'HIMACHAL PRADESH', 'JAMMU & KASHMIR',<br>
-       'JHARKHAND', 'KARNATAKA', 'KERALA', 'LADAKH', 'LAKSHADWEEP',<br>
-       'MADHYA PRADESH', 'MAHARASHTRA', 'MANIPUR', 'MEGHALAYA', 'MIZORAM',<br>
-       'NAGALAND', 'ODISHA', 'PUDUCHERRY', 'PUNJAB', 'RAJASTHAN',<br>
-       'SIKKIM', 'TAMIL NADU', 'TELANGANA', 'TRIPURA', 'UTTAR PRADESH',<br>
-       'UTTARAKHAND', 'WEST BENGAL'], dtype=object)<br>
+
+![](C4.PNG)
 
 Now, sinse Amount column has countinuous data, plotting boxplot:<br>
 ```python
 sns.boxplot(amz['Amount'])
 plt.show()
 ```
-![](boxplot.PNG)
+![](C5.PNG)
 
 running descriptive analysis:<br>
 ```python
 amz[['Amount']].describe()
 ```
 output:<br>
-	    |Amount<br>
-count	|120833.000000<br>
-mean	|648.710886<br>
-std	  |281.273230<br>
-min	  |0.000000<br>
-25%	  |449.000000<br>
-50%	  |605.000000<br>
-75%	  |788.000000<br>
-max	  |5584.000000<br>
+
+![](C6.PNG)
 
 Since, Amount column has outliers, it makes sense to replace null values with median value.<br>
 ```python
@@ -280,24 +203,8 @@ Again checking information about dataset:<br>
 amz.info()
 ```
 output:<br>
- -   Column              Non-Null Count   Dtype<br>         
----  ------              --------------   -----<br>         
- 0   Order ID            128609 non-null  object<br>     
- 1   Date                128609 non-null  datetime64[ns]<br>
- 2   Status              128609 non-null  object<br>        
- 3   Fulfilment          128609 non-null  object<br>        
- 4   Sales Channel       128609 non-null  object<br>    
- 5   ship-service-level  128609 non-null  object<br>        
- 6   Category            128609 non-null  object<br>        
- 7   Size                128609 non-null  object<br>        
- 8   Courier Status      128609 non-null  object<br>        
- 9   Quantity            128609 non-null  int64<br>         
- 10  Amount              128609 non-null  float64<br>       
- 11  ship-city           128609 non-null  object<br>        
- 12  ship-state          128609 non-null  object<br>        
- 13  ship-postal-code    128609 non-null  int32<br>        
- 14  B2B                 128609 non-null  bool<br>          
- 15  fulfilled-by        128609 non-null  object<br>
+
+![](C7.PNG)
 
 ```python
 amz.shape
@@ -314,6 +221,9 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_percentages})
 order_summary
 ```
+
+![](EA1.PNG)
+
 ```python
 st = sns.countplot(x=amz['Date'].dt.to_period('M'), order=amz['Date'].dt.to_period('M').sort_values().unique())
 plt.xticks(rotation=90)
@@ -330,7 +240,7 @@ for p in st.patches:
 plt.title('Percentage of orders in each month')
 plt.show()
 ```
-![](EDA1.PNG)
+![](EA2.PNG)
 
 Insightes:<br>
 Top 3 months with highest orders are:<br>
@@ -345,6 +255,9 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_percentages})
 order_summary
 ```
+
+![](EB1.PNG)
+
 ```python
 st = sns.countplot(x='Status', data=amz, order=amz['Status'].value_counts().index)
 plt.xticks(rotation=90)
@@ -362,7 +275,8 @@ for p in st.patches:
 plt.title('Percentage of status of orders')
 plt.show()
 ```
-![](EDA2.PNG)
+
+![](EB2.PNG)
 
 Insights:<br>
 14.21% of the total orders are canceled, highlighting a negative aspect that could be improved.<br>
@@ -374,12 +288,15 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_percentages})
 order_summary
 ```
+
+![](EC1.PNG)
+
 ```python
 plt.pie(amz['Fulfilment'].value_counts(), labels=amz['Fulfilment'].value_counts().index, autopct='%1.1f%%', startangle=90, colors=plt.cm.Paired.colors)
 plt.title('Percentage of Orders Based on Fulfilment')
 plt.show()
 ```
-![](EDA3.PNG)
+![](EC2.PNG)
 
 Insights:<br>
 Approximately 70% of orders are fulfilled by Amazon, while the remaining 30% are handled by the merchant.<br>
@@ -391,13 +308,16 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_percentages})
 order_summary
 ```
+
+![](ED1.PNG)
+
 ```python
 plt.pie(amz['Sales Channel'].value_counts(), labels=amz['Sales Channel'].value_counts().index, 
         autopct='%1.1f%%', startangle=90, colors=plt.cm.Paired.colors)
 plt.title('Percentage of Orders Based on Sales Channel')
 plt.show()
 ```
-![](EDA4.PNG)
+![](ED2.PNG)
 
 Insights:<br>
 99.9% of order sales are through Amazon.<br>
@@ -409,13 +329,17 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_percentages})
 order_summary
 ```
+
+![](EE1.PNG)
+
 ```python
 plt.pie(amz['ship-service-level'].value_counts(), labels=amz['ship-service-level'].value_counts().index, 
         autopct='%1.1f%%', startangle=90, colors=plt.cm.Paired.colors)
 plt.title('Percentage of Orders Based on ship-service-level')
 plt.show()
 ```
-![](EDA5.PNG)
+
+![](EE2.PNG)
 
 Insights:<br>
 Expedited shipping accounts for 68.7% of orders, indicating a strong preference among customers for faster delivery over standard shipping options.<br>
@@ -427,6 +351,9 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_percentages})
 order_summary
 ```
+
+![](EF1.PNG)
+
 ```python
 plt.figure(figsize=(8,5))
 st = sns.countplot(y='Category', data=amz, order=amz['Category'].value_counts().index)
@@ -444,7 +371,8 @@ for p in st.patches:
 plt.title('Percentage of Orders Based on Category')
 plt.show()
 ```
-![](EDA6.PNG)
+
+![](EF2.PNG)
 
 Insights:<br>
 The top 3 selling categories are:<br>
@@ -459,6 +387,9 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_percentages})
 order_summary
 ```
+
+![](EG1.PNG)
+
 ```python
 st = sns.countplot(x='Size', data=amz, order=['XS','S','M','L','XL','XXL','3XL','4XL','5XL','3XL','Free'])
 plt.xticks(rotation=90)
@@ -476,7 +407,8 @@ for p in st.patches:
 plt.title('Percentage of Orders base on Size')
 plt.show()
 ```
-![](EDA7.PNG)
+
+![](EG2.PNG)
 
 Insights:<br>
 Size M is the best-selling, while size 4XL is the least popular.<br>
@@ -488,6 +420,9 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_percentages})
 order_summary
 ```
+
+![](EH1.PNG)
+
 ```python
 plt.pie(amz['Courier Status'].value_counts(), labels=amz['Courier Status'].value_counts().index, 
         autopct='%1.1f%%', startangle=90, colors=plt.cm.Paired.colors, wedgeprops={'width': 0.3, 'edgecolor': 'white'},
@@ -495,7 +430,8 @@ plt.pie(amz['Courier Status'].value_counts(), labels=amz['Courier Status'].value
 plt.title('Percentage of Orders Based on Courier Status')
 plt.show()
 ```
-![](EDA8.PNG)
+
+![](EH2.PNG)
 
 Insights:<br>
 4.6% of orders are canceled, an issue that needs to be addressed. Additionally, 5.2% of orders remain unshipped, presenting an area for improvement.<br>
@@ -507,6 +443,9 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_percentages})
 order_summary
 ```
+
+![](EI1.PNG)
+
 ```python
 plt.figure(figsize = (8,5))
 st = sns.countplot(x='Quantity', data=amz)
@@ -525,7 +464,8 @@ for p in st.patches:
 plt.title('Percentage of Orders based on Quantity')
 plt.show()
 ```
-![](EDA9.PNG)
+
+![](EI2.PNG)
 
 Insights:<br>
 89.77% of customers place orders with a quantity of 1, indicating a strong preference for smaller purchases, which presents an opportunity to encourage larger orders.<br>
@@ -542,6 +482,9 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order_percentages})
 order_summary
 ```
+
+![](EJ1.PNG)
+
 ```python
 plt.figure(figsize = (8,5))
 st = sns.histplot(amz['Amount'], bins=np.arange(0, 6001, 500))
@@ -557,7 +500,8 @@ plt.gca().get_yaxis().set_visible(False)
 plt.title('Percentage distribution of orders based on Amount')
 plt.show()
 ```
-![](EDA10.PNG)
+
+![](EJ2.PNG)
 
 Insights:<br>
 Most of the order volume falls within the INR 500-600 range, with order volume decreasing as the order amount exceeds INR 1000.<br>
@@ -569,12 +513,18 @@ order_percentages = (order_counts / len(amz)) * 100
 top_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order_percentages})
 top_5_summary
 ```
+
+![](EK1.PNG)
+
 ```python
 order_counts = amz['ship-state'].value_counts().nsmallest(5)
 order_percentages = (order_counts / len(amz)) * 100
 bottom_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order_percentages})
 bottom_5_summary
 ```
+
+![](EK2.PNG)
+
 ```python
 plt.figure(figsize=(10, 8))
 
@@ -607,7 +557,8 @@ for q in st_bottom.patches:
 plt.tight_layout()
 plt.show()
 ```
-![](EDA11.PNG)
+
+![](EK3.PNG)
 
 Insights:<br>
 The highest order volume comes from Maharashtra, followed by Karnataka and Tamil Nadu. States with the lowest order volumes include LAKSHADWEEP, LADAKH and DADRA AND NAGAR HAVELI AND DAMAN AND DIU.<br>
@@ -619,12 +570,18 @@ order_percentages = (order_counts / len(amz)) * 100
 top_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order_percentages})
 top_5_summary
 ```
+
+![](EL1.PNG)
+
 ```python
 order_counts = amz['ship-city'].value_counts().nsmallest(5)
 order_percentages = (order_counts / len(amz)) * 100
 bottom_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order_percentages})
 bottom_5_summary
 ```
+
+![](EL2.PNG)
+
 ```python
 plt.figure(figsize=(10, 5))
 
@@ -657,7 +614,8 @@ for q in st_bottom.patches:
 plt.tight_layout()
 plt.show()
 ```
-![](EDA12.PNG)
+
+![](EL3.PNG)
 
 Insights:<br>
 The highest order volume comes from Bengaluru, followed by Hyderabad and Mumbai. Cities with the lowest order volumes include Kasumpti SHIMLA, NALLAPADU, and Edathala.<br>
@@ -669,12 +627,18 @@ order_percentages = (order_counts / len(amz)) * 100
 top_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order_percentages})
 top_5_summary
 ```
+
+![](EM1.PNG)
+
 ```python
 order_counts = amz['ship-postal-code'].value_counts().nsmallest(5)
 order_percentages = (order_counts / len(amz)) * 100
 bottom_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order_percentages})
 bottom_5_summary
 ```
+
+![](EM2.PNG)
+
 ```python
 plt.figure(figsize=(10, 5))
 
@@ -707,7 +671,8 @@ for q in st_bottom.patches:
 plt.tight_layout()
 plt.show()
 ```
-![](EDA13.PNG)
+
+![](EM3.PNG)
 
 Insights:<br>
 The highest order volume comes from 201301, followed by 122001 and 560037. Cities with the lowest order volumes include 388160, 414609, and 799120.<br>
@@ -719,12 +684,15 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_percentages})
 order_summary
 ```
+
+![](EN1.PNG)
+
 ```python
 plt.pie(amz['B2B'].value_counts(), labels=amz['B2B'].value_counts().index, autopct='%1.1f%%', startangle=90, colors=plt.cm.Paired.colors)
 plt.title('B2B or not?')
 plt.show()
 ```
-![](EDA14.PNG)
+![](EN2.PNG)
 
 Insights:<br>
 With only 0.7% of orders being B2B, there is significant potential to expand Amazon's B2B offerings.<br>
@@ -736,12 +704,15 @@ order_percentages = (order_counts / len(amz)) * 100
 order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_percentages})
 order_summary
 ```
+
+![](EO1.PNG)
+
 ```python
 plt.pie(amz['fulfilled-by'].value_counts(), labels=amz['fulfilled-by'].value_counts().index, autopct='%1.1f%%', startangle=90, colors=plt.cm.Paired.colors)
 plt.title('fulfilled-by:')
 plt.show()
 ```
-![](EDA15.PNG)
+![](EO2.PNG)
 
 Insights:<br>
 30.4% of orders are fulfilled by Easy Ship, indicating significant potential for Amazon to expand its fulfillment capabilities.<br>
