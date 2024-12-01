@@ -1,6 +1,6 @@
 # Ecom_Data_Analysis
 
-![](D.PNG)
+![](Python/D.PNG)
 
 ## Description:<br>
 The e-commerce dataset from Amazon.in contains approximately 128,976 rows and 19 columns. The columns are described as follows:
@@ -13,7 +13,7 @@ amz.info()
 ```
 output:<br>
 
-![](C1.PNG)
+![](Python/C1.PNG)
 
  As we can see the datatypes of Date, ship-postal-code, etc. are incorrect. Also, data contains Null values.
 
@@ -41,7 +41,7 @@ amz.isna().sum()
 ```
 output:
 
-![](C2.PNG)
+![](Python/C2.PNG)
 
 Since, ship-city, ship-state, ship-postal-code, ship-country has only 31 balnks, removing it.<br>
 ```python
@@ -76,7 +76,7 @@ pd.unique(amz['ship-state']))
 ```
 output:<br>
 
-![](C3.PNG)
+![](Python/C3.PNG)
 
 To solve this problem,<br>
 ```python
@@ -156,14 +156,14 @@ amz['ship-state'].sort_values().unique()
 ```
 output:<br>
 
-![](C4.PNG)
+![](Python/C4.PNG)
 
 Now, sinse Amount column has countinuous data, plotting boxplot:<br>
 ```python
 sns.boxplot(amz['Amount'])
 plt.show()
 ```
-![](C5.PNG)
+![](Python/C5.PNG)
 
 running descriptive analysis:<br>
 ```python
@@ -171,7 +171,7 @@ amz[['Amount']].describe()
 ```
 output:<br>
 
-![](C6.PNG)
+![](Python/C6.PNG)
 
 Since, Amount column has outliers, it makes sense to replace null values with median value.<br>
 ```python
@@ -204,7 +204,7 @@ amz.info()
 ```
 output:<br>
 
-![](C7.PNG)
+![](Python/C7.PNG)
 
 ```python
 amz.shape
@@ -222,7 +222,7 @@ order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_p
 order_summary
 ```
 
-![](EA1.PNG)
+![](Python/EA1.PNG)
 
 ```python
 st = sns.countplot(x=amz['Date'].dt.to_period('M'), order=amz['Date'].dt.to_period('M').sort_values().unique())
@@ -240,7 +240,7 @@ for p in st.patches:
 plt.title('Percentage of orders in each month')
 plt.show()
 ```
-![](EA2.PNG)
+![](Python/EA2.PNG)
 
 Insightes:<br>
 Top 3 months with highest orders are:<br>
@@ -256,7 +256,7 @@ order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_p
 order_summary
 ```
 
-![](EB1.PNG)
+![](Python/EB1.PNG)
 
 ```python
 st = sns.countplot(x='Status', data=amz, order=amz['Status'].value_counts().index)
@@ -276,7 +276,7 @@ plt.title('Percentage of status of orders')
 plt.show()
 ```
 
-![](EB2.PNG)
+![](Python/EB2.PNG)
 
 Insights:<br>
 14.21% of the total orders are canceled, highlighting a negative aspect that could be improved.<br>
@@ -289,14 +289,14 @@ order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_p
 order_summary
 ```
 
-![](EC1.PNG)
+![](Python/EC1.PNG)
 
 ```python
 plt.pie(amz['Fulfilment'].value_counts(), labels=amz['Fulfilment'].value_counts().index, autopct='%1.1f%%', startangle=90, colors=plt.cm.Paired.colors)
 plt.title('Percentage of Orders Based on Fulfilment')
 plt.show()
 ```
-![](EC2.PNG)
+![](Python/EC2.PNG)
 
 Insights:<br>
 Approximately 70% of orders are fulfilled by Amazon, while the remaining 30% are handled by the merchant.<br>
@@ -309,7 +309,7 @@ order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_p
 order_summary
 ```
 
-![](ED1.PNG)
+![](Python/ED1.PNG)
 
 ```python
 plt.pie(amz['Sales Channel'].value_counts(), labels=amz['Sales Channel'].value_counts().index, 
@@ -317,7 +317,7 @@ plt.pie(amz['Sales Channel'].value_counts(), labels=amz['Sales Channel'].value_c
 plt.title('Percentage of Orders Based on Sales Channel')
 plt.show()
 ```
-![](ED2.PNG)
+![](Python/ED2.PNG)
 
 Insights:<br>
 99.9% of order sales are through Amazon.<br>
@@ -330,7 +330,7 @@ order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_p
 order_summary
 ```
 
-![](EE1.PNG)
+![](Python/EE1.PNG)
 
 ```python
 plt.pie(amz['ship-service-level'].value_counts(), labels=amz['ship-service-level'].value_counts().index, 
@@ -339,7 +339,7 @@ plt.title('Percentage of Orders Based on ship-service-level')
 plt.show()
 ```
 
-![](EE2.PNG)
+![](Python/EE2.PNG)
 
 Insights:<br>
 Expedited shipping accounts for 68.7% of orders, indicating a strong preference among customers for faster delivery over standard shipping options.<br>
@@ -352,7 +352,7 @@ order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_p
 order_summary
 ```
 
-![](EF1.PNG)
+![](Python/EF1.PNG)
 
 ```python
 plt.figure(figsize=(8,5))
@@ -372,7 +372,7 @@ plt.title('Percentage of Orders Based on Category')
 plt.show()
 ```
 
-![](EF2.PNG)
+![](Python/EF2.PNG)
 
 Insights:<br>
 The top 3 selling categories are:<br>
@@ -388,7 +388,7 @@ order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_p
 order_summary
 ```
 
-![](EG1.PNG)
+![](Python/EG1.PNG)
 
 ```python
 st = sns.countplot(x='Size', data=amz, order=['XS','S','M','L','XL','XXL','3XL','4XL','5XL','3XL','Free'])
@@ -408,7 +408,7 @@ plt.title('Percentage of Orders base on Size')
 plt.show()
 ```
 
-![](EG2.PNG)
+![](Python/EG2.PNG)
 
 Insights:<br>
 Size M is the best-selling, while size 4XL is the least popular.<br>
@@ -421,7 +421,7 @@ order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_p
 order_summary
 ```
 
-![](EH1.PNG)
+![](Python/EH1.PNG)
 
 ```python
 plt.pie(amz['Courier Status'].value_counts(), labels=amz['Courier Status'].value_counts().index, 
@@ -431,7 +431,7 @@ plt.title('Percentage of Orders Based on Courier Status')
 plt.show()
 ```
 
-![](EH2.PNG)
+![](Python/EH2.PNG)
 
 Insights:<br>
 4.6% of orders are canceled, an issue that needs to be addressed. Additionally, 5.2% of orders remain unshipped, presenting an area for improvement.<br>
@@ -444,7 +444,7 @@ order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_p
 order_summary
 ```
 
-![](EI1.PNG)
+![](Python/EI1.PNG)
 
 ```python
 plt.figure(figsize = (8,5))
@@ -465,7 +465,7 @@ plt.title('Percentage of Orders based on Quantity')
 plt.show()
 ```
 
-![](EI2.PNG)
+![](Python/EI2.PNG)
 
 Insights:<br>
 89.77% of customers place orders with a quantity of 1, indicating a strong preference for smaller purchases, which presents an opportunity to encourage larger orders.<br>
@@ -483,7 +483,7 @@ order_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order_pe
 order_summary
 ```
 
-![](EJ1.PNG)
+![](Python/EJ1.PNG)
 
 ```python
 plt.figure(figsize = (8,5))
@@ -501,7 +501,7 @@ plt.title('Percentage distribution of orders based on Amount')
 plt.show()
 ```
 
-![](EJ2.PNG)
+![](Python/EJ2.PNG)
 
 Insights:<br>
 Most of the order volume falls within the INR 500-600 range, with order volume decreasing as the order amount exceeds INR 1000.<br>
@@ -514,7 +514,7 @@ top_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order_pe
 top_5_summary
 ```
 
-![](EK1.PNG)
+![](Python/EK1.PNG)
 
 ```python
 order_counts = amz['ship-state'].value_counts().nsmallest(5)
@@ -523,7 +523,7 @@ bottom_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order
 bottom_5_summary
 ```
 
-![](EK2.PNG)
+![](Python/EK2.PNG)
 
 ```python
 plt.figure(figsize=(10, 8))
@@ -558,7 +558,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![](EK3.PNG)
+![](Python/EK3.PNG)
 
 Insights:<br>
 The highest order volume comes from Maharashtra, followed by Karnataka and Tamil Nadu. States with the lowest order volumes include LAKSHADWEEP, LADAKH and DADRA AND NAGAR HAVELI AND DAMAN AND DIU.<br>
@@ -571,7 +571,7 @@ top_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order_pe
 top_5_summary
 ```
 
-![](EL1.PNG)
+![](Python/EL1.PNG)
 
 ```python
 order_counts = amz['ship-city'].value_counts().nsmallest(5)
@@ -580,7 +580,7 @@ bottom_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order
 bottom_5_summary
 ```
 
-![](EL2.PNG)
+![](Python/EL2.PNG)
 
 ```python
 plt.figure(figsize=(10, 5))
@@ -615,7 +615,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![](EL3.PNG)
+![](Python/EL3.PNG)
 
 Insights:<br>
 The highest order volume comes from Bengaluru, followed by Hyderabad and Mumbai. Cities with the lowest order volumes include Kasumpti SHIMLA, NALLAPADU, and Edathala.<br>
@@ -628,7 +628,7 @@ top_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order_pe
 top_5_summary
 ```
 
-![](EM1.PNG)
+![](Python/EM1.PNG)
 
 ```python
 order_counts = amz['ship-postal-code'].value_counts().nsmallest(5)
@@ -637,7 +637,7 @@ bottom_5_summary = pd.DataFrame({'Order Count': order_counts,'Percentage': order
 bottom_5_summary
 ```
 
-![](EM2.PNG)
+![](Python/EM2.PNG)
 
 ```python
 plt.figure(figsize=(10, 5))
@@ -672,7 +672,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![](EM3.PNG)
+![](Python/EM3.PNG)
 
 Insights:<br>
 The highest order volume comes from 201301, followed by 122001 and 560037. Cities with the lowest order volumes include 388160, 414609, and 799120.<br>
@@ -685,14 +685,14 @@ order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_p
 order_summary
 ```
 
-![](EN1.PNG)
+![](Python/EN1.PNG)
 
 ```python
 plt.pie(amz['B2B'].value_counts(), labels=amz['B2B'].value_counts().index, autopct='%1.1f%%', startangle=90, colors=plt.cm.Paired.colors)
 plt.title('B2B or not?')
 plt.show()
 ```
-![](EN2.PNG)
+![](Python/EN2.PNG)
 
 Insights:<br>
 With only 0.7% of orders being B2B, there is significant potential to expand Amazon's B2B offerings.<br>
@@ -705,14 +705,14 @@ order_summary = pd.DataFrame({'Order Count': order_counts, 'Percentage': order_p
 order_summary
 ```
 
-![](EO1.PNG)
+![](Python/EO1.PNG)
 
 ```python
 plt.pie(amz['fulfilled-by'].value_counts(), labels=amz['fulfilled-by'].value_counts().index, autopct='%1.1f%%', startangle=90, colors=plt.cm.Paired.colors)
 plt.title('fulfilled-by:')
 plt.show()
 ```
-![](EO2.PNG)
+![](Python/EO2.PNG)
 
 Insights:<br>
 30.4% of orders are fulfilled by Easy Ship, indicating significant potential for Amazon to expand its fulfillment capabilities.<br>
@@ -721,3 +721,7 @@ Insights:<br>
 - Conducted data cleaning and preprocessing to resolve duplicates, missing values, and inconsistent data types, ensuring a reliable dataset for analysis.
 - Performed exploratory data analysis (EDA) to uncover insights on top-selling categories, regional trends, and customer preferences, enabling informed decision-making.
 - Identified inefficiencies, including a 14.21% cancellation rate and 5.2% unshipped orders, and recommended strategies to enhance user experiance and reduce cancellations.
+
+## Recommendation:<br>
+- Increase Shipping Accuracy: Improve the order packaging and shipping process to ensure that orders are shipped promptly and accurately, reducing the 5.2% unshipped orders.
+- Offer Alternatives for Cancellations: Instead of outright cancellations, consider offering users options like order modifications, substitutions, or delays (e.g., backorder options), which can maintain customer satisfaction without losing the sale.
