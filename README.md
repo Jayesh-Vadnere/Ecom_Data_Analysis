@@ -5,7 +5,7 @@
 ## Description:<br>
 The e-commerce dataset from Amazon.in contains approximately 128,976 rows and 19 columns. The columns are described as follows:
 
-![](P1.PNG)
+![](Python/P1.PNG)
 
 ## Data Cleaning:<br>
 ```python
